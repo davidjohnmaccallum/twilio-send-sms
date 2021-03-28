@@ -4,6 +4,8 @@ Sends an SMS using Twilio.
 
 Includes access control via an X-API-Key header.
 
+See firebase-functions branch for an example of deploying to Firebase cloud functions.
+
 ## Getting Started
 
 Create a .env file with the following environment variables.
