@@ -13,6 +13,15 @@ var from = process.env.FROM_NUMBER;
 
 var twilio = new Twilio(accountSid, token);
 
+app.use((req,res,next) => {
+  if (req.get('X-API-Key') !== '1234') {
+    return res.status(401).send({
+      err: 'Missing or invalid X-API-Key header'
+    })
+  }
+  next()
+})
+
 app.post('/send-welcome-sms', (req, res) => {
 
   if (!req.body.name || !req.body.to) {    
