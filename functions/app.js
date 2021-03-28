@@ -22,7 +22,7 @@ app.use((req,res,next) => {
   next()
 })
 
-app.post('/send-welcome-sms', (req, res) => {
+app.post('/welcome-sms', (req, res) => {
 
   if (!req.body.name || !req.body.to) {    
     return res.status(400).send({
@@ -36,7 +36,7 @@ app.post('/send-welcome-sms', (req, res) => {
     from
   })
   
-  console.debug("Sending message", welcomeMessage)
+  console.debug('Sending message', welcomeMessage)
 
   twilio.messages.create(welcomeMessage, (err, smsRes) => {
     if (err) {
@@ -46,9 +46,9 @@ app.post('/send-welcome-sms', (req, res) => {
       })
     }    
     
-    console.debug("Sms sent.", smsRes)
+    console.debug('Sms sent.', smsRes)
     res.send({
-      result: "Sent",
+      result: 'Sent',
       detail: welcomeMessage
     })
   })
@@ -67,7 +67,4 @@ app.use((err, _req, res, _next) => {
   })
 })
 
-app.listen(process.env.PORT || 9000, err => {
-  if (err) return console.error("Could not start server", err)
-  console.debug(`Server started on port ${process.env.PORT || 9000}`)
-})
+module.exports = app

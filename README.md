@@ -6,7 +6,9 @@ Includes access control via an X-API-Key header.
 
 ## Getting Started
 
-Create a .env file with the following environment variables.
+For details see the [Firebase Functions docs](https://firebase.google.com/docs/functions/get-started).
+
+Create a .env file in the functions folder with the following environment variables.
 
 ```
 TWILIO_ACCOUNT_SID='xxx'
@@ -14,15 +16,19 @@ TWILIO_AUTH_TOKEN='xxx'
 FROM_NUMBER='xxx'
 ```
 
-Start the server.
+Create a Firebase project.
+Setup the function.
 
 ```sh
-npm install
-npm start
+npm install -g firebase-tools
+cd functions
+firebase login
+firebase init functions
+npm run deploy
 ```
 
 Send a message (replace to param with your number).
 
 ```sh
-curl http://localhost:9000/send-welcome-sms -d '{"name":"Paul", "to":"+27111111111"}' --header "Content-Type: application/json" --header "X-API-Key: 1234"
+curl [Replace with function URL from Firebase console]/welcome-sms -d '{"name":"Paul", "to":"+27111111111"}' --header "Content-Type: application/json" --header "X-API-Key: 1234"
 ```
